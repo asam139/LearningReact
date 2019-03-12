@@ -7,6 +7,7 @@ import ajax from '../ajax';
 export default class DealDetail extends Component {
   static propTypes = {
     initialDealData: PropTypes.object.isRequired,
+    onBack: PropTypes.func.isRequired,
   };
 
   state = {
@@ -24,6 +25,9 @@ export default class DealDetail extends Component {
     const { deal } = this.state;
     return (
       <View style={styles.deal}>
+        <TouchableOpacity onPress={this.props.onBack}>
+          <Text style={styles.backLink}>Back</Text>
+        </TouchableOpacity>
         <Image source={{ uri: deal.media[0] }} style={styles.image} />
         <View style={styles.detail}>
           <View>
@@ -55,9 +59,10 @@ const styles = StyleSheet.create({
   deal: {
     backgroundColor: 'white',
     marginHorizontal: 12,
-    marginTop: 50,
-    borderColor: '#bbbb',
-    borderWidth: 1,
+  },
+  backLink: {
+    padding: 5,
+    color: 'blue',
   },
   image: {
     width: '100%',
@@ -65,6 +70,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#cccc',
   },
   detail: {
+    borderColor: '#bbbb',
+    borderWidth: 1,
   },
   title: {
     fontSize: 16,

@@ -12,18 +12,33 @@ import {Text, View, StyleSheet} from 'react-native';
 
 import ajax from '../ajax'
 import DealList from './DealList.js'
-import DealDetail from "./DealDetail";
+import DealDetail from './DealDetail';
+import SearchBar from './SearchBar';
 
 type Props = {};
 export default class App extends Component<Props> {
   state = {
     deals: [],
+    dealsFromSearch: [],
     currentDealId: null,
+  };
+
+   searchDeals = async (searchTerm) => {
+     let dealsFromSearch = [];
+     if (dealsFromSearch) {
+       dealsFromSearch = await ajax.fetchDealSearchResults(searchTerm);
+     }
+     this.setState( { dealsFromSearch: dealsFromSearch })
   };
 
   setCurrentDeal = (dealId) => {
     this.setState( {
       currentDealId: dealId
+    });
+  };
+  unsetCurrentDeal = () => {
+    this.setState( {
+      currentDealId: null
     });
   };
   currentDeal = () => {
@@ -40,16 +55,30 @@ export default class App extends Component<Props> {
 
   render() {
     if(this.state.currentDealId) {
-      let a = this.currentDeal()
-      console.log(a)
-      return <DealDetail initialDealData={this.currentDeal()}/>
+      return (
+        <View style={styles.main}>
+          <DealDetail
+            initialDealData={this.currentDeal()}
+            onBack={this.unsetCurrentDeal}
+          />
+        </View>
+      )
     }
-    if(this.state.deals.length > 0) {
-      return <DealList deals={this.state.deals} onItemPress={this.setCurrentDeal}/>
+    const dealsToDisplay =
+      this.state.dealsFromSearch.length > 0 ?
+      this.state.dealsFromSearch :
+      this.state.deals;
+    if(dealsToDisplay.length > 0) {
+      return (
+        <View style={styles.main}>
+          <SearchBar searchDeals={this.searchDeals}/>
+          <DealList deals={dealsToDisplay} onItemPress={this.setCurrentDeal}/>
+        </View>
+      )
     }
 
     return (
-      <View style={styles.container}>
+      <View style={styles.main}>
         <Text style={styles.header}>Bakesale</Text>
       </View>
     );
@@ -57,12 +86,10 @@ export default class App extends Component<Props> {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  main: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: 'white',
-
+    marginTop: 40,
   },
   header: {
     fontSize: 40,
