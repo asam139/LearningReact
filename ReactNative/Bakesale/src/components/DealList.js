@@ -8,15 +8,17 @@ type Props = {};
 export default class DealList extends Component<Props> {
   static propTypes = {
     deals: PropTypes.array.isRequired,
+    onItemPress: PropTypes.func.isRequired,
   };
 
   render() {
-    console.log(this.props.deals)
     return (
       <View style={styles.list}>
         <FlatList
           data={this.props.deals}
-          renderItem={({item}) => <DealItem deal={item}/>}
+          renderItem={({item}) => (
+            <DealItem deal={item} onPress={this.props.onItemPress}/>
+          )}
         />
       </View>
     );
