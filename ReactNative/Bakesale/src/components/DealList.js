@@ -27,6 +27,7 @@ export default class DealList extends Component<Props> {
 
 const styles = StyleSheet.create({
   list: {
+    flex: 1,
     backgroundColor: 'white',
     width: '100%',
   },

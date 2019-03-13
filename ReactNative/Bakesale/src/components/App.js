@@ -64,9 +64,10 @@ export default class App extends Component<Props> {
   };
 
   async componentDidMount() {
-    //const deals = await ajax.fetchInitialDeals();
-    //this.setState({ deals: deals });
-    this.animateTitle()
+    this.animateTitle();
+
+    const deals = await ajax.fetchInitialDeals();
+    this.setState({ deals: deals });
   }
 
   render() {
@@ -111,12 +112,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-  },
-  main: {
-    flex: 1,
-    backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  main: {
     marginTop: 40,
   },
   header: {
