@@ -7,13 +7,19 @@ import {TextInput, StyleSheet} from 'react-native';
 export default class SearchBar extends Component {
   static propTypes = {
     searchDeals: PropTypes.func.isRequired,
+    initialSearchTearms: PropTypes.string.isRequired,
   };
 
   state = {
-    searchTerm: '',
+    searchTerm: this.props.initialSearchTearms,
   };
 
-  debouncedSearchDeals = debounce(this.props.searchDeals, 300);
+  searchDeals = () => {
+    this.props.searchDeals(searchTerm);
+    this.inputElement.blur();
+  };
+
+  debouncedSearchDeals = debounce(this.searchDeals, 300);
 
   handleChange = (searchTerm) => {
     this.setState({ searchTerm }, () => {
@@ -26,8 +32,10 @@ export default class SearchBar extends Component {
       <TextInput
         style={styles.input}
         placeholder='Search deals...'
-        onChangeText={this.handleChange}>
-      </TextInput>
+        onChangeText={this.handleChange}
+        ref={(inputElement) => { this.inputElement = inputElement; }}
+        value={this.state.searchTerm}
+      />
     );
   }
 }

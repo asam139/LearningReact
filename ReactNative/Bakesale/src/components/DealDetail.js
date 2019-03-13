@@ -4,6 +4,7 @@ import {
   Text,
   Button,
   View,
+  ScrollView,
   Image,
   TouchableOpacity,
   PanResponder,
@@ -100,10 +101,10 @@ export default class DealDetail extends Component {
           style={[{ left: this.imageXPos }, styles.image] }
           source={{ uri: deal.media[this.state.imageIndex] }}
         />
-        <View style={styles.detail}>
-          <View>
-            <Text style={styles.title}>{deal.title}</Text>
-          </View>
+        <View>
+          <Text style={styles.title}>{deal.title}</Text>
+        </View>
+        <ScrollView style={styles.detail}>
           <View style={styles.footer}>
             <View style={styles.info}>
               <Text style={styles.price}>{priceDisplay(deal.price)}</Text>
@@ -120,7 +121,7 @@ export default class DealDetail extends Component {
             <Text>{deal.description}</Text>
           </View>
           <Button title='Buy this deal!' onPress={this.openDealUrl}/>
-        </View>
+        </ScrollView>
       </View>
     );
   }

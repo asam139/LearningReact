@@ -22,6 +22,7 @@ export default class App extends Component<Props> {
     deals: [],
     dealsFromSearch: [],
     currentDealId: null,
+    activeSearchTerm: '',
   };
 
    searchDeals = async (searchTerm) => {
@@ -29,7 +30,10 @@ export default class App extends Component<Props> {
      if (dealsFromSearch) {
        dealsFromSearch = await ajax.fetchDealSearchResults(searchTerm);
      }
-     this.setState( { dealsFromSearch: dealsFromSearch })
+     this.setState( {
+       dealsFromSearch: dealsFromSearch,
+       activeSearchTerm: searchTerm
+     })
   };
 
   setCurrentDeal = (dealId) => {
@@ -91,7 +95,10 @@ export default class App extends Component<Props> {
       return (
         <View style = {styles.container}>
           <View style={styles.main}>
-            <SearchBar searchDeals={this.searchDeals}/>
+            <SearchBar
+              searchDeals={this.searchDeals}
+              initialSearchTearms={this.state.activeSearchTerm}
+            />
             <DealList deals={dealsToDisplay} onItemPress={this.setCurrentDeal}/>
           </View>
         </View>
