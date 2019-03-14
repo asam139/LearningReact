@@ -1,6 +1,15 @@
 import storeFactory from './store'
-import {addDay, removeDay, setGoal, randomGoals} from './actions'
+import {
+  addDay,
+  removeDay,
+  setGoal,
+  randomGoals,
+  suggestResortNames
+} from './actions'
 
+const store = storeFactory(initialState);
+
+//======================================================================
 const initialState = localStorage['redux-storage'] ?
   JSON.parse(localStorage['redux-storage']) :
   {};
@@ -8,10 +17,8 @@ const initialState = localStorage['redux-storage'] ?
 const saveState = () => {
   localStorage['redux-storage'] = JSON.stringify(store.getState());
 };
-
-const store = storeFactory(initialState);
-
 store.subscribe(saveState);
+//======================================================================
 
 
 store.dispatch(
@@ -27,8 +34,8 @@ store.dispatch(
 );
 
 store.dispatch(
-  randomGoals()
-)
+  suggestResortNames("hea")
+);
 
 
 
