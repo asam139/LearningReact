@@ -1,5 +1,5 @@
-import C from './constants'
 import storeFactory from './store'
+import {addDay, removeDay, setGoal} from './actions'
 
 const initialState = localStorage['redux-storage'] ?
   JSON.parse(localStorage['redux-storage']) :
@@ -14,35 +14,18 @@ const store = storeFactory(initialState);
 store.subscribe(saveState);
 
 
-store.dispatch({
-  type: C.ADD_DAY,
-  payload: {
-    "resort": "Mt Shasta",
-    "date": "2016-10-28",
-    "powder": false,
-    "backcountry": true
-  }
-});
+store.dispatch(
+  addDay("Mt Shasta", "2016-10-28")
+);
 
-store.dispatch({
-  type: C.ADD_DAY,
-  payload: {
-    "resort": "Squaw Valley",
-    "date": "2012-10-11",
-    "powder": false,
-    "backcountry": false
-  }
-});
+store.dispatch(
+  removeDay("2016-10-28")
+);
 
-store.dispatch({
-  type: C.ADD_DAY,
-  payload: {
-    "resort": "The Canyons",
-    "date": "2016-10-01",
-    "powder": true,
-    "backcountry": true
-  }
-});
+store.dispatch(
+  setGoal(100)
+);
+
 
 
 
