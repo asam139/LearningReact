@@ -41,3 +41,18 @@ export const clearSuggestions = () => ({
 });
 
 
+export const randomGoals = () => (dispatch, getState) => {
+  if (getState().resortNames.fetching) {
+    return
+  }
+
+  dispatch({
+    type:C.FETCH_RESORT_NAMES
+  });
+
+  setTimeout(() => {
+    dispatch({
+      type:C.CANCEL_FETCHING
+    });
+  },15000)
+};

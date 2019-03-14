@@ -1,5 +1,5 @@
 import storeFactory from './store'
-import {addDay, removeDay, setGoal} from './actions'
+import {addDay, removeDay, setGoal, randomGoals} from './actions'
 
 const initialState = localStorage['redux-storage'] ?
   JSON.parse(localStorage['redux-storage']) :
@@ -25,6 +25,10 @@ store.dispatch(
 store.dispatch(
   setGoal(100)
 );
+
+store.dispatch(
+  randomGoals()
+)
 
 
 

@@ -1,13 +1,7 @@
 import appReducer from './reducers'
+import thunk from 'redux-thunk'
 import { createStore, applyMiddleware } from 'redux'
 
-/*const consoleMessages = (store) => {
-  return (next) => {
-    return (action) => {
-
-    }
-  }
-};*/
 const consoleMessages = store => next => action => {
   let result;
 
@@ -34,5 +28,5 @@ const consoleMessages = store => next => action => {
 };
 
 export default (initialState={}) => {
-  return applyMiddleware(consoleMessages)(createStore)(appReducer, initialState)
+  return applyMiddleware(thunk, consoleMessages)(createStore)(appReducer, initialState)
 }
