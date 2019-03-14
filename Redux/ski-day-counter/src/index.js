@@ -1,23 +1,19 @@
 import C from './constants'
-import appReducer from './store/reducers'
-import { createStore} from 'redux'
+import storeFactory from './store'
 
 const initialState = localStorage['redux-storage'] ?
   JSON.parse(localStorage['redux-storage']) :
   {};
 
-const store = createStore(appReducer, initialState);
-
-// For debugging
-window.store = store;
-
-store.subscribe(() => {
-
+const saveState = () => {
   localStorage['redux-storage'] = JSON.stringify(store.getState());
+};
 
-});
+const store = storeFactory(initialState);
 
-/*
+store.subscribe(saveState);
+
+
 store.dispatch({
   type: C.ADD_DAY,
   payload: {
@@ -29,27 +25,24 @@ store.dispatch({
 });
 
 store.dispatch({
-  type: C.SET_GOAL,
-  payload: 20
-});*/
-
-const unsubcribeGoalLogger = store.subscribe(() => {
-  console.log(`
-    Goal: ${store.getState().goal}
-  `)
+  type: C.ADD_DAY,
+  payload: {
+    "resort": "Squaw Valley",
+    "date": "2012-10-11",
+    "powder": false,
+    "backcountry": false
+  }
 });
 
-setInterval(() => {
+store.dispatch({
+  type: C.ADD_DAY,
+  payload: {
+    "resort": "The Canyons",
+    "date": "2016-10-01",
+    "powder": true,
+    "backcountry": true
+  }
+});
 
-  store.dispatch({
-    type: C.SET_GOAL,
-    payload: Math.floor(Math.random() * 100)
-  });
 
-}, 250);
 
-setInterval(() => {
-
-  unsubcribeGoalLogger();
-
-}, 3000);
