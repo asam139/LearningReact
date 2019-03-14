@@ -8,15 +8,36 @@ export const addDay = (resort, date, powder=false, backcountry=false) => {
 };
 
 
-export const removeDay = (date) => {
+export const removeDay = date => {
   return {
     type: C.REMOVE_DAY,
     payload: date
   }
 };
 
-export const setGoal = (goal) => ({
+export const setGoal = goal => ({
   type: C.SET_GOAL,
   payload: goal
 });
+
+export const addError = message => ({
+  type: C.ADD_ERROR,
+  payload: message
+});
+
+export const clearError = index => ({
+  type: C.CLEAR_ERROR,
+  payload: index
+});
+
+export const changeSuggestions = suggestions => ({
+  type: C.CHANGE_SUGGESTIONS,
+  payload: suggestions
+});
+
+
+export const clearSuggestions = () => ({
+  type: C.CHANGE_SUGGESTIONS
+});
+
 
