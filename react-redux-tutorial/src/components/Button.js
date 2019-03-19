@@ -1,9 +1,22 @@
-import React from "react";
+import React from 'react';
+
+const ButtonInline = ({
+                        onClick,
+                        type = 'button',
+                        children
+                      }) =>
+  <Button
+    type={type}
+    className="button-inline"
+    onClick={onClick}
+  >
+    {children}
+  </Button>
 
 const Button = ({
-                  type = 'button',
-                  className,
                   onClick,
+                  className,
+                  type = 'button',
                   children
                 }) =>
   <button
@@ -12,6 +25,10 @@ const Button = ({
     onClick={onClick}
   >
     {children}
-  </button>;
+  </button>
 
-export default Button
+export default Button;
+
+export {
+  ButtonInline
+};

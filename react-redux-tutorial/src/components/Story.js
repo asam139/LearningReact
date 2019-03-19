@@ -1,10 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
+import {doArchiveStory} from '../actions/archive';
+import { ButtonInline } from './Button'
 import './Story.css';
-import {doArchiveStory} from "../actions/archive";
-
-import ButtonInline from './ButtonInline'
 
 const Story = ({ story, columns, onArchive }) => {
   const {
