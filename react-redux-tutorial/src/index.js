@@ -6,9 +6,17 @@ import store from './store';
 import { getReadableStories } from './selectors/story';
 import { STORY_ARCHIVE } from './constants/actionTypes';
 
-ReactDOM.render(
-  <App stories={getReadableStories(store.getState())} onArchive={ (id) => { store.dispatch({type: STORY_ARCHIVE, id}) } }/>,
-  document.getElementById('root')
-);
+function render() {
+  ReactDOM.render(
+    <App
+      stories={getReadableStories(store.getState())}
+      onArchive={ (id) => { store.dispatch({type: STORY_ARCHIVE, id}) } }
+    />,
+    document.getElementById('root')
+  );
+}
 
-//ReactDOM.render(<App />, document.getElementById('root'));
+store.subscribe(render);
+render();
+
+
