@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import './Story.css';
 import {doArchiveStory} from "../actions/archive";
 
+import ButtonInline from './ButtonInline'
+
 const Story = ({ story, columns, onArchive }) => {
   const {
     title,
@@ -36,33 +38,6 @@ const Story = ({ story, columns, onArchive }) => {
     </div>
   );
 };
-
-const ButtonInline = ({
-                        type = 'button',
-                        onClick,
-                        children
-                      }) =>
-  <Button
-    type={type}
-    className="button-inline"
-    onClick={onClick}
-  >
-    {children}
-  </Button>;
-
-const Button = ({
-                  type = 'button',
-                  className,
-                  onClick,
-                  children
-                }) =>
-  <button
-    type={type}
-    className={className}
-    onClick={onClick}
-  >
-    {children}
-  </button>;
 
 
 const mapDispatchToProps = dispatch => ({
