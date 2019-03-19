@@ -5,9 +5,7 @@ import Stories from './Stories';
 
 const App = ({ stories, onArchive }) =>
   <div className="app">
-    <Stories
-      stories={stories}
-      onArchive={onArchive}/>
+    <Stories/>
   </div>;
 
 export default App;
