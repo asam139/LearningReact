@@ -16,6 +16,6 @@ describe('story reducer', () => {
     deepFreeze(previousState);
     const newState = storyReducer(previousState, action);
 
-    expect(newState).toEqual(expectedNewState);;
+    expect(newState).toEqual(expectedNewState);
   });
 });
