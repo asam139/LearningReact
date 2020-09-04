@@ -16,7 +16,7 @@
     "babel-jest": "24.4.0",
     "jest": "24.4.0",
     "metro-react-native-babel-preset": "0.53.0",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.13.1",
     "react-test-renderer": "16.6.3"
   },
   "jest": {
